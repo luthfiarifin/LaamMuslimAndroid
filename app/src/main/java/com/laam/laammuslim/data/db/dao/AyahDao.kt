@@ -9,9 +9,10 @@ import com.laam.laammuslim.data.db.entities.Sura
 @Dao
 interface AyahDao {
 
-    @Query("SELECT * FROM ayah WHERE suraID = 1")
-    fun getAllAyah(): LiveData<List<Ayah>>
+    @Query("SELECT * FROM ayah WHERE suraID = :suraId")
+    fun getAllAyah(suraId: Int): LiveData<List<Ayah>>
 
     @Query("SELECT * FROM sura WHERE englishName LIKE '%' || :search || '%' OR id LIKE '%' || :search || '%'")
     fun getAllSura(search: String): LiveData<List<Sura>>
+
 }

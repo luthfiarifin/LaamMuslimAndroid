@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="?attr/actionBarSize"
-    tools:context=".ui.main.quran.QuranFragment">
+    tools:context=".ui.main.quran_sura.QuranSuraFragment">
 
 <!--    <EditText-->
 <!--        android:id="@+id/et_quran_search"-->

@@ -6,11 +6,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.laam.laammuslim.R
 import com.laam.laammuslim.data.db.entities.Sura
+import com.laam.laammuslim.data.listener.SurahRecyclerListener
 import kotlinx.android.synthetic.main.item_quran_surah.view.*
 
 class SurahRecyclerAdapter(
-    val list: List<Sura>
+    val listener: SurahRecyclerListener
 ) : RecyclerView.Adapter<SurahRecyclerAdapter.ViewHolder>() {
+
+    var list: List<Sura> = listOf()
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
@@ -30,6 +33,15 @@ class SurahRecyclerAdapter(
             tv_item_surah_surah.text = item.englishName
             tv_item_surah_arab.text = item.name
             tv_item_surah_total_ayah.text = "${item.revelationType} - ${item.numberOfAyahs} Ayah"
+
+            setOnClickListener {
+                listener.onClick(it, item)
+            }
         }
+    }
+
+    fun updateList(list: List<Sura>) {
+        this.list = list
+        notifyDataSetChanged()
     }
 }

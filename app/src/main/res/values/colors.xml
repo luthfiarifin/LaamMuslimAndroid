@@ -5,6 +5,8 @@
     <color name="colorAccent">#03DAC5</color>
 
     <color name="colorWhite">#FFF</color>
+    <color name="colorGrey1">#E8E8E8</color>
+    <color name="colorGrey2">#E1E1E1</color>
     <color name="colorBlack">#000</color>
 
     <color name="InactiveBottomNavIconColor">#636363</color>

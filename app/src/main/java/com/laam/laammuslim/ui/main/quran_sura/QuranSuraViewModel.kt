@@ -1,16 +1,12 @@
-package com.laam.laammuslim.ui.main.quran
+package com.laam.laammuslim.ui.main.quran_sura
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.laam.laammuslim.data.db.AppDatabase
 import javax.inject.Inject
 
-class QuranViewModel @Inject constructor(
+class QuranSuraViewModel @Inject constructor(
     val db: AppDatabase
 ) : ViewModel() {
-
-    fun getSurahAlFatehah() = db.getAyahDao().getAllAyah()
 
     fun getAllSura(search: String) = db.getAyahDao().getAllSura(search)
 
