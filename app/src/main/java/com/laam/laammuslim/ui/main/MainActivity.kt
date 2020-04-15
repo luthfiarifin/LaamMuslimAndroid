@@ -32,26 +32,6 @@ class MainActivity : DaggerAppCompatActivity() {
         setUpNavigation()
     }
 
-    private fun locationPermission() {
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return
-        }
-    }
-
     private fun setUpNavigation() {
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
@@ -65,8 +45,9 @@ class MainActivity : DaggerAppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+        val fragmentHideActionBar = arrayListOf<Int>(R.id.navigation_home)
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.navigation_home) {
+            if (destination.id in fragmentHideActionBar) {
                 supportActionBar?.hide()
             } else {
                 supportActionBar?.show()

@@ -166,6 +166,7 @@
                 android:drawableStart="@drawable/quran"
                 android:drawablePadding="13dp"
                 android:drawableTint="@color/colorPrimary"
+                android:elevation="1dp"
                 android:gravity="center_vertical"
                 android:paddingStart="30dp"
                 android:paddingTop="20dp"

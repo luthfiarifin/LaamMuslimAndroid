@@ -1,12 +1,18 @@
 package com.laam.laammuslim.ui.main.quran
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.laam.laammuslim.R
+import com.laam.laammuslim.data.adapter.SurahRecyclerAdapter
 import com.laam.laammuslim.di.viewmodel.ViewModelProviderFactory
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_quran.*
@@ -33,14 +39,39 @@ class QuranFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        quranViewModel.getSurahAlFatehah().observe(viewLifecycleOwner, Observer {
+        setUpFragment()
+        getDataSura()
+    }
+
+    private fun setUpFragment() {
+        rv_quran_sura.layoutManager = LinearLayoutManager(activity)
+    }
+
+    private fun getDataSura() {
+        getSuraSearch("")
+
+        with(persistent_search_view){
+            setOnSearchConfirmedListener { searchView, query ->
+                searchView.collapse()
+                getSuraSearch(query)
+            }
+
+            hideLeftButton()
+            hideRightButton()
+            isVoiceInputButtonEnabled = false
+
+            setOnClearInputBtnClickListener {
+                getSuraSearch("")
+            }
+        }
+    }
+
+    private fun getSuraSearch(s: String) {
+        quranViewModel.getAllSura(s).observe(viewLifecycleOwner, Observer {
             it?.let { list ->
-                var a = ""
-                for (i in list) {
-                    a += "${i.verseID}. ${i.ayahText}\n"
-                }
-                text_dashboard.text = a
+                rv_quran_sura.adapter = SurahRecyclerAdapter(list)
             }
         })
     }
+
 }

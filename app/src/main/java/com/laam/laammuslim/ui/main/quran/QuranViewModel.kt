@@ -12,4 +12,6 @@ class QuranViewModel @Inject constructor(
 
     fun getSurahAlFatehah() = db.getAyahDao().getAllAyah()
 
+    fun getAllSura(search: String) = db.getAyahDao().getAllSura(search)
+
 }

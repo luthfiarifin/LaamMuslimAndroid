@@ -2,6 +2,6 @@
     <string name="app_name">LaamMuslim</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_home">Home</string>
-    <string name="title_quran">Quran</string>
+    <string name="title_quran">Al Quran</string>
     <string name="title_notifications">Notifications</string>
 </resources>
