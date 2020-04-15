@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.laam.laammuslim.ui.main.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_schedule_prayer_fragment"
+            app:destination="@id/schedule_prayer_fragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_quran"
+            app:destination="@id/navigation_quran" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_quran"
+        android:name="com.laam.laammuslim.ui.main.quran.QuranFragment"
+        android:label="@string/title_quran"
+        tools:layout="@layout/fragment_quran" />
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="com.laam.laammuslim.ui.main.notifications.NotificationsFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/schedule_prayer_fragment"
+        android:name="com.laam.laammuslim.ui.main.schedule_prayer.SchedulePrayerFragment"
+        android:label="Schedule Prayer"
+        tools:layout="@layout/fragment_schedule_prayer" >
+        <argument
+            android:name="city"
+            app:argType="string" />
+    </fragment>
+</navigation>
