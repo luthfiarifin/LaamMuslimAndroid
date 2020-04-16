@@ -4,21 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="?attr/actionBarSize"
     tools:context=".ui.main.quran_sura.QuranSuraFragment">
-
-<!--    <EditText-->
-<!--        android:id="@+id/et_quran_search"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="@color/white"-->
-<!--        android:drawableStart="@drawable/ic_search"-->
-<!--        android:drawablePadding="20dp"-->
-<!--        android:hint="Search"-->
-<!--        android:padding="20dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <com.paulrybitskyi.persistentsearchview.PersistentSearchView
         android:id="@+id/persistent_search_view"

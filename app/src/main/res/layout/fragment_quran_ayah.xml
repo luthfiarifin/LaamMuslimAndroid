@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="?attr/actionBarSize"
     tools:context=".ui.main.quran_sura.QuranSuraFragment">
 
     <androidx.recyclerview.widget.RecyclerView

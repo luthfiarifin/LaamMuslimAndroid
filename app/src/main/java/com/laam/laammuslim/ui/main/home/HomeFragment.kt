@@ -145,4 +145,8 @@ class HomeFragment : DaggerFragment() {
         rv_home_prayer_schedule.layoutManager = LinearLayoutManager(activity)
         rv_home_prayer_schedule.adapter = PrayerTimeRecyclerAdapter(scheduleOfPrays)
     }
+
+    fun onPermissionSuccess() {
+        getCurrentLocation()
+    }
 }
