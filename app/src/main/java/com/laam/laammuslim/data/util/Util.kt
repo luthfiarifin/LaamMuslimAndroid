@@ -56,3 +56,6 @@ fun convertFromLongToTime(mills: Long): String {
 
 fun getDifferentMillsTime(time: String): Long =
     convertToDateFormat(time).time - convertToDateFormat(convertTo24HrFormat(getCurrentTimeFormat)).time
+
+fun getDifferentMillsTimeBA(before: String, after: String): Long =
+    convertToDateFormat(after).time - convertToDateFormat(before).time

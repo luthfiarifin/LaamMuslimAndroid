@@ -2,7 +2,6 @@ package com.laam.laammuslim.ui.main.home
 
 import android.annotation.SuppressLint
 import android.os.CountDownTimer
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -86,7 +85,7 @@ class HomeViewModel @Inject constructor(
             }
             in (removeColon(isya)..2359) -> {
                 next = "Subuh $subuh"
-                mills = getDifferentMillsTime(subuh)
+                mills = getDifferentMillsTime("23:59") + getDifferentMillsTimeBA("00:00", subuh)
             }
             in (0..removeColon(subuh)) -> {
                 next = "Subuh $subuh"

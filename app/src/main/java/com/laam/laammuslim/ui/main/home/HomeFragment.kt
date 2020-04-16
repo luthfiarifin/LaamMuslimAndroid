@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,7 +26,6 @@ import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.util.*
 import javax.inject.Inject
-
 
 class HomeFragment : DaggerFragment() {
 
