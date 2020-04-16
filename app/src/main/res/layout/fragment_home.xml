@@ -5,19 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
-        android:id="@+id/frm_progress_bar"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#57B5B5B5"
-        android:visibility="gone">
-
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
-    </FrameLayout>
-
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
@@ -80,99 +67,106 @@
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.core.widget.NestedScrollView
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/srl_home"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="30dp"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_layout_rounded_white"
-                android:elevation="1dp"
-                android:orientation="vertical"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp">
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="30dp"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingStart="30dp"
-                    android:paddingEnd="30dp">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:src="@drawable/ic_date" />
+                    android:background="@drawable/bg_layout_rounded_white"
+                    android:elevation="1dp"
+                    android:orientation="vertical"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp">
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:layout_weight="2"
-                        android:orientation="vertical">
+                        android:orientation="horizontal"
+                        android:paddingStart="30dp"
+                        android:paddingEnd="30dp">
 
-                        <TextView
-                            android:id="@+id/tv_home_day"
-                            style="@style/TextAppearance.AppCompat.Item"
+                        <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Today / Day" />
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:src="@drawable/ic_date" />
 
-                        <TextView
-                            android:id="@+id/tv_home_date"
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Date" />
+                            android:layout_marginStart="15dp"
+                            android:layout_weight="2"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_home_day"
+                                style="@style/TextAppearance.AppCompat.Item"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Today / Day" />
+
+                            <TextView
+                                android:id="@+id/tv_home_date"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Date" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tv_home_prayer_see_all"
+                            style="@style/TextAppearance.AppCompat.ButtonText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="end|center"
+                            android:text="Lihat Semua" />
                     </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/tv_home_prayer_see_all"
-                        style="@style/TextAppearance.AppCompat.ButtonText"
-                        android:layout_width="wrap_content"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_home_prayer_schedule"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="end|center"
-                        android:text="Lihat Semua" />
+                        android:layout_marginTop="10dp"
+                        tools:itemCount="1"
+                        tools:listitem="@layout/item_prayer_time" />
                 </LinearLayout>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_home_prayer_schedule"
+                <TextView
+                    android:id="@+id/tv_home_btn_quran"
+                    style="@style/TextAppearance.AppCompat.ButtonText"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
-                    tools:itemCount="1"
-                    tools:listitem="@layout/item_prayer_time" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/bg_layout_rounded_white"
+                    android:drawableStart="@drawable/quran"
+                    android:drawablePadding="13dp"
+                    android:drawableTint="@color/colorPrimary"
+                    android:elevation="1dp"
+                    android:gravity="center_vertical"
+                    android:paddingStart="30dp"
+                    android:paddingTop="20dp"
+                    android:paddingEnd="30dp"
+                    android:paddingBottom="20dp"
+                    android:text="Sudahkah Anda Baca Quran Hari Ini?" />
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/tv_home_btn_quran"
-                style="@style/TextAppearance.AppCompat.ButtonText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/bg_layout_rounded_white"
-                android:drawableStart="@drawable/quran"
-                android:drawablePadding="13dp"
-                android:drawableTint="@color/colorPrimary"
-                android:elevation="1dp"
-                android:gravity="center_vertical"
-                android:paddingStart="30dp"
-                android:paddingTop="20dp"
-                android:paddingEnd="30dp"
-                android:paddingBottom="20dp"
-                android:text="Sudahkah Anda Baca Quran Hari Ini?" />
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

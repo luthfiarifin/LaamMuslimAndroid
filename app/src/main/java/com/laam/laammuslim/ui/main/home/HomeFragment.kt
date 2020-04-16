@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.location.LocationServices
@@ -42,7 +43,6 @@ class HomeFragment : DaggerFragment() {
     private lateinit var tvAgo: TextView
     private lateinit var tvPraySeeAll: TextView
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -71,6 +71,10 @@ class HomeFragment : DaggerFragment() {
 
         tv_home_btn_quran.setOnClickListener {
             onQuranClickListener(it)
+        }
+
+        srl_home.setOnRefreshListener {
+            getCurrentLocation()
         }
     }
 
@@ -118,10 +122,10 @@ class HomeFragment : DaggerFragment() {
                                 .show()
                         }
                         Status.StatusType.LOADING -> {
-                            frm_progress_bar.visibility = View.VISIBLE
+                            srl_home.isRefreshing = true
                         }
                         Status.StatusType.SUCCESS -> {
-                            frm_progress_bar.visibility = View.GONE
+                            srl_home.isRefreshing = false
                             onScheduleSuccess(it.data!!)
                         }
                     }

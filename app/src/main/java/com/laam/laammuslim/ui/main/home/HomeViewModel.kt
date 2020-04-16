@@ -47,8 +47,8 @@ class HomeViewModel @Inject constructor(
         return result
     }
 
+    val liveDataTimePray: MutableLiveData<List<String>> = MutableLiveData()
     fun getTimePray(data: MuslimSalatDailyResponse): LiveData<List<String>> {
-        val liveData: MutableLiveData<List<String>> = MutableLiveData()
         val list = mutableListOf<String>()
 
         val timeStampNow = convertTo24HrFormat(getCurrentTimeFormat)
@@ -99,10 +99,10 @@ class HomeViewModel @Inject constructor(
             @SuppressLint("SetTextI18n")
             override fun onTick(millisUntilFinished: Long) {
                 list.add(1, "${convertFromLongToTime(millisUntilFinished)} Lagi")
-                liveData.postValue(list)
+                liveDataTimePray.postValue(list)
             }
         }.start()
 
-        return liveData
+        return liveDataTimePray
     }
 }
