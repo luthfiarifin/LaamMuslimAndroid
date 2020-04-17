@@ -2,13 +2,32 @@ package com.laam.laammuslim.data.util
 
 import android.annotation.SuppressLint
 import android.view.View
+import android.widget.ImageView
+import androidx.databinding.BindingAdapter
 import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import java.text.SimpleDateFormat
 import java.util.*
 
 const val MUSLIM_SALAT_URL = "http://muslimsalat.com/"
+const val GITHUB_URL = "https://api.github.com/"
 
+fun ImageView.loadImage(url: String?) {
+    val option = RequestOptions()
+        .circleCrop()
+
+    Glide.with(context)
+        .setDefaultRequestOptions(option)
+        .load(url)
+        .into(this)
+}
+
+@BindingAdapter("android:imageCircleUrl")
+fun loadImageUrl(view: ImageView, url: String?) {
+    view.loadImage(url)
+}
 
 fun View.changeNavigation(direction: NavDirections) {
     Navigation.findNavController(this).navigate(direction)

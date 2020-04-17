@@ -9,7 +9,7 @@
         android:id="@+id/navigation_home"
         android:name="com.laam.laammuslim.ui.main.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_navigation_home_to_schedule_prayer_fragment"
             app:destination="@id/schedule_prayer_fragment"
@@ -26,22 +26,26 @@
         android:id="@+id/navigation_quran"
         android:name="com.laam.laammuslim.ui.main.quran_sura.QuranSuraFragment"
         android:label="@string/title_quran"
-        tools:layout="@layout/fragment_quran_sura" >
+        tools:layout="@layout/fragment_quran_sura">
         <action
             android:id="@+id/action_navigation_quran_to_quran_ayah_fragment"
             app:destination="@id/quran_ayah_fragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.laam.laammuslim.ui.main.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_information"
+        android:name="com.laam.laammuslim.ui.main.information.InformationFragment"
+        android:label="@string/title_information"
+        tools:layout="@layout/fragment_information" >
+        <action
+            android:id="@+id/action_navigation_information_to_about_fragment"
+            app:destination="@id/about_fragment" />
+    </fragment>
     <fragment
         android:id="@+id/schedule_prayer_fragment"
         android:name="com.laam.laammuslim.ui.main.schedule_prayer.SchedulePrayerFragment"
         android:label="Schedule Prayer"
-        tools:layout="@layout/fragment_schedule_prayer" >
+        tools:layout="@layout/fragment_schedule_prayer">
         <argument
             android:name="city"
             app:argType="string" />
@@ -49,9 +53,13 @@
     <fragment
         android:id="@+id/quran_ayah_fragment"
         android:name="com.laam.laammuslim.ui.main.quran_ayah.QuranAyahFragment"
-        android:label="Ayah Quran" >
+        android:label="Ayah Quran">
         <argument
             android:name="sura"
             app:argType="com.laam.laammuslim.data.db.entities.Sura" />
     </fragment>
+    <fragment
+        android:id="@+id/about_fragment"
+        android:name="com.laam.laammuslim.ui.main.about.AboutFragment"
+        android:label="@string/title_about" />
 </navigation>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="profile"
+            type="com.laam.laammuslim.data.model.GithubProfileResponse" />
+    </data>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/srl_about"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/img_about_profile"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_marginTop="40dp"
+                android:imageCircleUrl="@{profile.avatar_url}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_about_mame"
+                style="@style/TextAppearance.AppCompat.Item.Header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@{profile.name}"
+                app:layout_constraintEnd_toEndOf="@+id/img_about_profile"
+                app:layout_constraintStart_toStartOf="@+id/img_about_profile"
+                app:layout_constraintTop_toBottomOf="@+id/img_about_profile" />
+
+            <TextView
+                android:id="@+id/tv_about_username"
+                style="@style/TextAppearance.AppCompat.Item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@{profile.login}"
+                app:layout_constraintEnd_toEndOf="@+id/tv_about_mame"
+                app:layout_constraintStart_toStartOf="@+id/tv_about_mame"
+                app:layout_constraintTop_toBottomOf="@+id/tv_about_mame" />
+
+            <TextView
+                android:id="@+id/tv_about_link"
+                style="@style/TextAppearance.AppCompat.Item2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:autoLink="web"
+                android:text="@{profile.html_url}"
+                app:layout_constraintEnd_toEndOf="@+id/tv_about_username"
+                app:layout_constraintStart_toStartOf="@+id/tv_about_username"
+                app:layout_constraintTop_toBottomOf="@+id/tv_about_username" />
+
+            <TextView
+                android:id="@+id/tv_about_blog_link"
+                style="@style/TextAppearance.AppCompat.Item2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:autoLink="web"
+                android:text="@{profile.blog}"
+                app:layout_constraintEnd_toEndOf="@+id/tv_about_link"
+                app:layout_constraintStart_toStartOf="@+id/tv_about_link"
+                app:layout_constraintTop_toBottomOf="@+id/tv_about_link" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</layout>

@@ -1,6 +1,8 @@
 package com.laam.laammuslim.di.app
 
+import com.laam.laammuslim.data.util.GITHUB_URL
 import com.laam.laammuslim.data.util.MUSLIM_SALAT_URL
+import com.laam.laammuslim.di.GithubRetrofitQualifier
 import com.laam.laammuslim.di.MuslimSalatRetrofitQualifier
 import dagger.Module
 import dagger.Provides
@@ -19,6 +21,17 @@ object AppModule {
     fun provideMuslimSalatRetrofitInstance(): Retrofit =
         Retrofit.Builder()
             .baseUrl(MUSLIM_SALAT_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .build()
+
+    @Singleton
+    @JvmStatic
+    @Provides
+    @GithubRetrofitQualifier
+    fun provideGithubalatRetrofitInstance(): Retrofit =
+        Retrofit.Builder()
+            .baseUrl(GITHUB_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()

@@ -2,6 +2,7 @@ package com.laam.laammuslim.di.ui.main
 
 import androidx.lifecycle.ViewModel
 import com.laam.laammuslim.di.viewmodel.ViewModelKey
+import com.laam.laammuslim.ui.main.about.AboutViewModel
 import com.laam.laammuslim.ui.main.home.HomeViewModel
 import com.laam.laammuslim.ui.main.quran_ayah.QuranAyahViewModel
 import com.laam.laammuslim.ui.main.quran_sura.QuranSuraViewModel
@@ -27,6 +28,11 @@ abstract class MainViewModelModule {
     @IntoMap
     @ViewModelKey(QuranAyahViewModel::class)
     abstract fun bindQuranAyahViewModel(quranAyahViewModel: QuranAyahViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AboutViewModel::class)
+    abstract fun bindAboutViewModel(aboutViewModel: AboutViewModel): ViewModel
 
     @Binds
     @IntoMap

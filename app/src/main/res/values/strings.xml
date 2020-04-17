@@ -3,5 +3,6 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_home">Home</string>
     <string name="title_quran">Al Quran</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_about">About</string>
+    <string name="title_information">Information</string>
 </resources>
