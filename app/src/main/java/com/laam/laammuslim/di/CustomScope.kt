@@ -6,13 +6,3 @@ import javax.inject.Scope
 @MustBeDocumented
 @Retention(AnnotationRetention.RUNTIME)
 annotation class MainScope()
-
-@Scope
-@MustBeDocumented
-@Retention(AnnotationRetention.RUNTIME)
-annotation class HomeScope()
-
-@Scope
-@MustBeDocumented
-@Retention(AnnotationRetention.RUNTIME)
-annotation class ScheduleScope()
