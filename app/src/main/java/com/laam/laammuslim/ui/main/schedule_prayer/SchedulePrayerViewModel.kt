@@ -40,4 +40,11 @@ class SchedulePrayerViewModel @Inject constructor(
 
         return result
     }
+
+
+    override fun onCleared() {
+        super.onCleared()
+
+        disposable.clear()
+    }
 }

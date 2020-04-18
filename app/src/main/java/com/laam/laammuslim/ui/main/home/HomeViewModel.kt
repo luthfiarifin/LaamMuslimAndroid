@@ -105,4 +105,10 @@ class HomeViewModel @Inject constructor(
 
         return liveDataTimePray
     }
+
+    override fun onCleared() {
+        super.onCleared()
+
+        disposable.clear()
+    }
 }
