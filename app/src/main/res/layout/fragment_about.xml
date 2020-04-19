@@ -35,6 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="@{profile.name}"
+                android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="@+id/img_about_profile"
                 app:layout_constraintStart_toStartOf="@+id/img_about_profile"
                 app:layout_constraintTop_toBottomOf="@+id/img_about_profile" />
@@ -46,6 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="@{profile.login}"
+                android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="@+id/tv_about_mame"
                 app:layout_constraintStart_toStartOf="@+id/tv_about_mame"
                 app:layout_constraintTop_toBottomOf="@+id/tv_about_mame" />
@@ -58,6 +60,7 @@
                 android:layout_marginTop="2dp"
                 android:autoLink="web"
                 android:text="@{profile.html_url}"
+                android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="@+id/tv_about_username"
                 app:layout_constraintStart_toStartOf="@+id/tv_about_username"
                 app:layout_constraintTop_toBottomOf="@+id/tv_about_username" />
@@ -70,6 +73,7 @@
                 android:layout_marginTop="2dp"
                 android:autoLink="web"
                 android:text="@{profile.blog}"
+                android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="@+id/tv_about_link"
                 app:layout_constraintStart_toStartOf="@+id/tv_about_link"
                 app:layout_constraintTop_toBottomOf="@+id/tv_about_link" />
