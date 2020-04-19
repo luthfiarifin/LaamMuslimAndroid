@@ -69,9 +69,9 @@
 
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/srl_home"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/srl_home"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <androidx.core.widget.NestedScrollView
@@ -121,7 +121,7 @@
                                 style="@style/TextAppearance.AppCompat.Item"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Today / Day" />
+                                android:text="Day" />
 
                             <TextView
                                 android:id="@+id/tv_home_date"

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="Ayah Setting">
+
+        <EditTextPreference
+            android:defaultValue="18"
+            android:dialogIcon="@drawable/ic_format"
+            android:icon="@drawable/ic_format"
+            android:key="ayah_text_preference"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Ayah Font Size" />
+    </PreferenceCategory>
+</PreferenceScreen>

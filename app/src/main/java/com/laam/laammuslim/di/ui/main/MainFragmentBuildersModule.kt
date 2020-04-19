@@ -22,9 +22,6 @@ abstract class MainFragmentBuildersModule {
     abstract fun contributeHomeFragment(): HomeFragment
 
     @ContributesAndroidInjector()
-    abstract fun contributeInformationFragment(): InformationFragment
-
-    @ContributesAndroidInjector()
     abstract fun contributeAboutFragment(): AboutFragment
 
     @ContributesAndroidInjector()

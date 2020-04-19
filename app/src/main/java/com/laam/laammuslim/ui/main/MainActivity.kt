@@ -3,6 +3,8 @@ package com.laam.laammuslim.ui.main
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -12,9 +14,12 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.laam.laammuslim.R
+import com.laam.laammuslim.data.util.changeNavigation
 import com.laam.laammuslim.ui.main.home.HomeFragment
+import com.laam.laammuslim.ui.main.information.InformationFragmentDirections
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.zip.Inflater
 
 class MainActivity : DaggerAppCompatActivity() {
 
@@ -117,4 +122,19 @@ class MainActivity : DaggerAppCompatActivity() {
             finish()
         }
     }
+
+//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        menuInflater.inflate(R.menu.about, menu)
+//
+//        return super.onCreateOptionsMenu(menu)
+//    }
+//
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        return if (item.itemId == R.id.action_about) {
+//            item.actionView.changeNavigation(InformationFragmentDirections.actionNavigationInformationToAboutFragment())
+//            true
+//        } else {
+//            super.onOptionsItemSelected(item)
+//        }
+//    }
 }

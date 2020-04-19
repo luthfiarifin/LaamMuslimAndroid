@@ -91,7 +91,7 @@ class HomeFragment : DaggerFragment() {
 
     @SuppressLint("SetTextI18n")
     private fun getCurrentDate() {
-        tv_home_day.text = "Today / $getCurrentDayFormat"
+        tv_home_day.text = getCurrentDayFormat
         tv_home_date.text = getCurrentDateNormalFormat
     }
 

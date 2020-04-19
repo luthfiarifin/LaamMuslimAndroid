@@ -9,7 +9,8 @@ import com.laam.laammuslim.R
 import com.laam.laammuslim.data.db.entities.Ayah
 import kotlinx.android.synthetic.main.item_quran_ayah.view.*
 
-class AyahRecyclerAdapter() : RecyclerView.Adapter<AyahRecyclerAdapter.ViewHolder>() {
+class AyahRecyclerAdapter(val fontSize: String?) :
+    RecyclerView.Adapter<AyahRecyclerAdapter.ViewHolder>() {
 
     var list: List<Ayah> = listOf()
 
@@ -38,6 +39,10 @@ class AyahRecyclerAdapter() : RecyclerView.Adapter<AyahRecyclerAdapter.ViewHolde
                 R.color.colorGrey2
             }
             setBackgroundColor(ContextCompat.getColor(view.context, color))
+
+            fontSize?.let {
+                tv_item_ayah_arab.textSize = it.toFloat()
+            }
         }
     }
 

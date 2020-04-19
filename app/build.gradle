@@ -98,6 +98,10 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
 
+    //Preference
+    def preferencesVersion = '1.1.0'
+    implementation "androidx.preference:preference:$preferencesVersion"
+
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.11.0'
 
