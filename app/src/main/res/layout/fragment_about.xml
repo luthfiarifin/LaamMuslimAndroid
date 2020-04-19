@@ -29,7 +29,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tv_about_mame"
+                android:id="@+id/tv_about_name"
                 style="@style/TextAppearance.AppCompat.Item.Header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -41,29 +41,17 @@
                 app:layout_constraintTop_toBottomOf="@+id/img_about_profile" />
 
             <TextView
-                android:id="@+id/tv_about_username"
-                style="@style/TextAppearance.AppCompat.Item"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="@{profile.login}"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toEndOf="@+id/tv_about_mame"
-                app:layout_constraintStart_toStartOf="@+id/tv_about_mame"
-                app:layout_constraintTop_toBottomOf="@+id/tv_about_mame" />
-
-            <TextView
                 android:id="@+id/tv_about_link"
                 style="@style/TextAppearance.AppCompat.Item2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="5dp"
                 android:autoLink="web"
                 android:text="@{profile.html_url}"
                 android:textAlignment="center"
-                app:layout_constraintEnd_toEndOf="@+id/tv_about_username"
-                app:layout_constraintStart_toStartOf="@+id/tv_about_username"
-                app:layout_constraintTop_toBottomOf="@+id/tv_about_username" />
+                app:layout_constraintEnd_toEndOf="@+id/tv_about_name"
+                app:layout_constraintStart_toStartOf="@+id/tv_about_name"
+                app:layout_constraintTop_toBottomOf="@+id/tv_about_name" />
 
             <TextView
                 android:id="@+id/tv_about_blog_link"
