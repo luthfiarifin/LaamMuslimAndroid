@@ -3,8 +3,6 @@ package com.laam.laammuslim.ui.main
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -14,12 +12,10 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.laam.laammuslim.R
-import com.laam.laammuslim.data.util.changeNavigation
 import com.laam.laammuslim.ui.main.home.HomeFragment
-import com.laam.laammuslim.ui.main.information.InformationFragmentDirections
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.zip.Inflater
+
 
 class MainActivity : DaggerAppCompatActivity() {
 
@@ -29,7 +25,7 @@ class MainActivity : DaggerAppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        checkSmsPermission()
+        checkLocationPermission()
         setUpNavigation()
     }
 
@@ -59,7 +55,7 @@ class MainActivity : DaggerAppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean =
         findNavController(R.id.nav_host_fragment).navigateUp()
 
-    fun checkSmsPermission() {
+    private fun checkLocationPermission() {
         if (ContextCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -74,21 +70,21 @@ class MainActivity : DaggerAppCompatActivity() {
                     .setTitle("Location Permission")
                     .setMessage("This app require access the location.")
                     .setPositiveButton("Ask me") { _, _ ->
-                        requestSmsPermission()
+                        requestLocationPermission()
                     }
                     .setNegativeButton("No") { _, _ ->
                         notifyDetailFragment(false)
                     }
                     .show()
             } else {
-                requestSmsPermission()
+                requestLocationPermission()
             }
         } else {
             notifyDetailFragment(true)
         }
     }
 
-    private fun requestSmsPermission() {
+    private fun requestLocationPermission() {
         ActivityCompat.requestPermissions(
             this,
             arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
@@ -122,19 +118,4 @@ class MainActivity : DaggerAppCompatActivity() {
             finish()
         }
     }
-
-//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//        menuInflater.inflate(R.menu.about, menu)
-//
-//        return super.onCreateOptionsMenu(menu)
-//    }
-//
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        return if (item.itemId == R.id.action_about) {
-//            item.actionView.changeNavigation(InformationFragmentDirections.actionNavigationInformationToAboutFragment())
-//            true
-//        } else {
-//            super.onOptionsItemSelected(item)
-//        }
-//    }
 }

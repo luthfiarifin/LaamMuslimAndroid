@@ -1,18 +1,23 @@
 package com.laam.laammuslim.ui.main.home
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.location.Geocoder
-import android.location.Location
+import android.location.LocationManager
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.laam.laammuslim.R
 import com.laam.laammuslim.data.adapter.PrayerTimeRecyclerAdapter
@@ -23,6 +28,7 @@ import com.laam.laammuslim.data.util.changeNavigation
 import com.laam.laammuslim.data.util.getCurrentDateNormalFormat
 import com.laam.laammuslim.data.util.getCurrentDayFormat
 import com.laam.laammuslim.di.viewmodel.ViewModelProviderFactory
+import dagger.android.support.DaggerAppCompatActivity
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.util.*
@@ -62,6 +68,7 @@ class HomeFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        requestLocation()
         getCurrentLocation()
         getCurrentDate()
 
@@ -76,6 +83,18 @@ class HomeFragment : DaggerFragment() {
         srl_home.setOnRefreshListener {
             getCurrentLocation()
         }
+    }
+
+    private fun requestLocation() {
+        val mLocationRequest: LocationRequest = LocationRequest.create()
+        mLocationRequest.interval = 60000
+        mLocationRequest.fastestInterval = 5000
+        mLocationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        val mLocationCallback: LocationCallback = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult?) {}
+        }
+        LocationServices.getFusedLocationProviderClient(context!!)
+            .requestLocationUpdates(mLocationRequest, mLocationCallback, null)
     }
 
     private fun onQuranClickListener(v: View) {
@@ -96,20 +115,25 @@ class HomeFragment : DaggerFragment() {
     }
 
     private fun getCurrentLocation() {
-        val fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity!!)
-        fusedLocationClient.lastLocation
-            .addOnSuccessListener { location: Location ->
-                val latitude = location.latitude
-                val longitude = location.longitude
+        if (isLocationEnabled()) {
+            LocationServices.getFusedLocationProviderClient(context!!).lastLocation
+                .addOnSuccessListener {
+                    it?.let { location ->
+                        val geocoder = Geocoder(context, Locale.getDefault())
+                        val addresses =
+                            geocoder.getFromLocation(location.latitude, location.longitude, 1)
 
-                val geocoder = Geocoder(context, Locale.getDefault())
-                val addresses =
-                    geocoder.getFromLocation(latitude, longitude, 1)
+                        city = addresses[0].subLocality.toString()
+                        toolbar.title = city
+                        subscribeSchedule(city)
 
-                city = addresses[0].subLocality.toString()
-                toolbar.title = city
-                subscribeSchedule(city)
-            }
+                        return@addOnSuccessListener
+                    }
+                    Toast.makeText(activity, "Location GPS not enabled", Toast.LENGTH_SHORT).show()
+                }
+        } else {
+            requestLocationEnable()
+        }
     }
 
     private fun subscribeSchedule(subLocality: String) {
@@ -148,5 +172,22 @@ class HomeFragment : DaggerFragment() {
 
     fun onPermissionSuccess() {
         getCurrentLocation()
+    }
+
+    private fun isLocationEnabled(): Boolean {
+        val lm: LocationManager =
+            activity?.getSystemService(DaggerAppCompatActivity.LOCATION_SERVICE) as LocationManager
+        return lm.isProviderEnabled(LocationManager.GPS_PROVIDER)
+    }
+
+    private fun requestLocationEnable() {
+        AlertDialog.Builder(activity!!)
+            .setTitle("Location Enabled")
+            .setMessage("GPS Network not enabled")
+            .setPositiveButton("Ok") { _, _ ->
+                startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
     }
 }
