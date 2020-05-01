@@ -1,61 +1,38 @@
 package com.laam.laammuslim.ui.main.about
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.laam.laammuslim.R
 import com.laam.laammuslim.data.model.Status
 import com.laam.laammuslim.databinding.FragmentAboutBinding
-import com.laam.laammuslim.di.viewmodel.ViewModelProviderFactory
-import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.fragment_about.*
-import javax.inject.Inject
+import com.laam.laammuslim.ui.base.BaseFragment
 
-class AboutFragment : DaggerFragment() {
+class AboutFragment : BaseFragment<FragmentAboutBinding, AboutViewModel>() {
 
-    private lateinit var aboutViewModel: AboutViewModel
-    private lateinit var binding: FragmentAboutBinding
-
-    @Inject
-    lateinit var factory: ViewModelProviderFactory
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        aboutViewModel =
-            ViewModelProvider(this, factory)[AboutViewModel::class.java]
-        binding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_about, container, false)
-
-        return binding.root
-    }
+    override var getLayoutId: Int = R.layout.fragment_about
+    override var getViewModel: Class<AboutViewModel> = AboutViewModel::class.java
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         observeGithubProfile()
-        srl_about.setOnRefreshListener {
+        mViewBinding.srlAbout.setOnRefreshListener {
             observeGithubProfile()
         }
     }
 
     private fun observeGithubProfile() {
-        aboutViewModel.getUserProfile().observe(viewLifecycleOwner, Observer {
+        mViewModel.getUserProfile().observe(viewLifecycleOwner, Observer {
             it?.let { status ->
                 when (status.status) {
                     Status.StatusType.LOADING -> {
-                        srl_about.isRefreshing = true
+                        mViewBinding.srlAbout.isRefreshing = true
                     }
                     Status.StatusType.SUCCESS -> {
-                        srl_about.isRefreshing = false
-                        binding.profile = status.data
+                        mViewBinding.srlAbout.isRefreshing = false
+                        mViewBinding.profile = status.data
                     }
                     Status.StatusType.ERROR -> {
                         Toast.makeText(activity, "Error : ${status.message}", Toast.LENGTH_SHORT)

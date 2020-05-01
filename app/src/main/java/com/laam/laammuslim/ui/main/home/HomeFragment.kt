@@ -6,14 +6,11 @@ import android.location.Geocoder
 import android.location.LocationManager
 import android.os.Bundle
 import android.provider.Settings
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -27,21 +24,15 @@ import com.laam.laammuslim.data.model.Status
 import com.laam.laammuslim.data.util.changeNavigation
 import com.laam.laammuslim.data.util.getCurrentDateNormalFormat
 import com.laam.laammuslim.data.util.getCurrentDayFormat
-import com.laam.laammuslim.di.viewmodel.ViewModelProviderFactory
+import com.laam.laammuslim.databinding.FragmentHomeBinding
+import com.laam.laammuslim.ui.base.BaseFragment
 import dagger.android.support.DaggerAppCompatActivity
-import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.fragment_home.*
 import java.util.*
-import javax.inject.Inject
 
-class HomeFragment : DaggerFragment() {
+class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     val TAG = "HomeFragment";
 
-    @Inject
-    lateinit var factory: ViewModelProviderFactory
-
-    private lateinit var homeViewModel: HomeViewModel
     private lateinit var city: String
 
     private lateinit var toolbar: Toolbar
@@ -49,24 +40,16 @@ class HomeFragment : DaggerFragment() {
     private lateinit var tvAgo: TextView
     private lateinit var tvPraySeeAll: TextView
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
-
-        homeViewModel = ViewModelProvider(this, factory)[HomeViewModel::class.java]
-        toolbar = root.findViewById(R.id.toolbar)
-        tvTime = root.findViewById(R.id.tv_home_salat_time)
-        tvAgo = root.findViewById(R.id.tv_home_salat_ago)
-        tvPraySeeAll = root.findViewById(R.id.tv_home_prayer_see_all)
-
-        return root
-    }
+    override var getLayoutId: Int = R.layout.fragment_home
+    override var getViewModel: Class<HomeViewModel> = HomeViewModel::class.java
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        toolbar = mViewBinding.toolbar
+        tvTime = mViewBinding.tvHomeSalatTime
+        tvAgo = mViewBinding.tvHomeSalatAgo
+        tvPraySeeAll = mViewBinding.tvHomePrayerSeeAll
 
         requestLocation()
         getCurrentLocation()
@@ -76,11 +59,11 @@ class HomeFragment : DaggerFragment() {
             onPrayerSeeAllClickListener(it)
         }
 
-        tv_home_btn_quran.setOnClickListener {
+        mViewBinding.tvHomeBtnQuran.setOnClickListener {
             onQuranClickListener(it)
         }
 
-        srl_home.setOnRefreshListener {
+        mViewBinding.srlHome.setOnRefreshListener {
             getCurrentLocation()
         }
     }
@@ -110,8 +93,8 @@ class HomeFragment : DaggerFragment() {
 
     @SuppressLint("SetTextI18n")
     private fun getCurrentDate() {
-        tv_home_day.text = getCurrentDayFormat
-        tv_home_date.text = getCurrentDateNormalFormat
+        mViewBinding.tvHomeDay.text = getCurrentDayFormat
+        mViewBinding.tvHomeDate.text = getCurrentDateNormalFormat
     }
 
     private fun getCurrentLocation() {
@@ -137,7 +120,7 @@ class HomeFragment : DaggerFragment() {
     }
 
     private fun subscribeSchedule(subLocality: String) {
-        homeViewModel.getDailySchedule(subLocality)
+        mViewModel.getDailySchedule(subLocality)
             .observe(viewLifecycleOwner, androidx.lifecycle.Observer {
                 it?.let {
                     when (it.status) {
@@ -146,10 +129,10 @@ class HomeFragment : DaggerFragment() {
                                 .show()
                         }
                         Status.StatusType.LOADING -> {
-                            srl_home.isRefreshing = true
+                            mViewBinding.srlHome.isRefreshing = true
                         }
                         Status.StatusType.SUCCESS -> {
-                            srl_home.isRefreshing = false
+                            mViewBinding.srlHome.isRefreshing = false
                             onScheduleSuccess(it.data!!)
                         }
                     }
@@ -158,7 +141,7 @@ class HomeFragment : DaggerFragment() {
     }
 
     private fun onScheduleSuccess(data: MuslimSalatDailyResponse) {
-        homeViewModel.getTimePray(data).observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+        mViewModel.getTimePray(data).observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             tvTime.text = it[0]
             tvAgo.text = it[1]
         })
@@ -166,8 +149,8 @@ class HomeFragment : DaggerFragment() {
     }
 
     private fun showPrayerSchedule(scheduleOfPrays: List<ScheduleOfPray>) {
-        rv_home_prayer_schedule.layoutManager = LinearLayoutManager(activity)
-        rv_home_prayer_schedule.adapter = PrayerTimeRecyclerAdapter(scheduleOfPrays)
+        mViewBinding.rvHomePrayerSchedule.layoutManager = LinearLayoutManager(activity)
+        mViewBinding.rvHomePrayerSchedule.adapter = PrayerTimeRecyclerAdapter(scheduleOfPrays)
     }
 
     fun onPermissionSuccess() {

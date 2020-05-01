@@ -1,4 +1,4 @@
-package com.laam.laammuslim
+package com.laam.laammuslim.ui.base
 
 import com.laam.laammuslim.di.app.DaggerAppComponent
 import dagger.android.AndroidInjector

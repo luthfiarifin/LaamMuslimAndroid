@@ -1,7 +1,7 @@
 package com.laam.laammuslim.di.app
 
 import android.app.Application
-import com.laam.laammuslim.BaseApplication
+import com.laam.laammuslim.ui.base.BaseApplication
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
